@@ -1,0 +1,190 @@
+<style>
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.carousel-container {
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.card {
+    min-width: 300px;
+    margin: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    padding: 16px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.card h3 {
+    margin: 10px 0;
+    padding-top: 15px;
+    color: #1c4587;
+}
+
+.card h2 {
+    margin: 10px 0;
+    padding-top: 10px;
+    font-size: 16px;
+    color: #1c4587;
+}
+
+.card p {
+    color: #000;
+    padding-top: 25px;
+    font-size: 14px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: left;
+
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+button.prev {
+    left: 0;
+}
+
+button.next {
+    right: 0;
+}
+</style>
+
+<script>
+const carousel = document.querySelector('.carousel');
+const cards = document.querySelectorAll('.card');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+let currentIndex = 0;
+
+const updateCarousel = () => {
+  const cardWidth = cards[0].offsetWidth + 20; // Card width + margin
+  carousel.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
+};
+
+const navigateCarousel = (direction) => {
+  currentIndex = (currentIndex + direction + cards.length) % cards.length;
+  updateCarousel();
+};
+
+// Add click event to buttons
+nextButton.addEventListener('click', () => navigateCarousel(1));
+prevButton.addEventListener('click', () => navigateCarousel(-1));
+
+// Open link on card click
+cards.forEach((card) => {
+  card.addEventListener('click', () => {
+    const url = card.getAttribute('data-url');
+    if (url) window.open(url, '_blank');
+  });
+});
+
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') navigateCarousel(1);
+  else if (e.key === 'ArrowLeft') navigateCarousel(-1);
+});
+
+// Initial setup
+updateCarousel();
+
+
+</script>
+
+
+
+
+<body>
+    
+
+
+
+
+<div class="carousel-container">
+
+
+
+        <div class="carousel">
+            <div class="card" data-url="https://www.appsheet.com/start/7cdc83db-a667-45eb-94dd-0f91d8cf3c5e">
+                <img src="/img/pedidocerto.png" alt="Imagem do Card 1" loading="lazy">
+                <h3>Pedido Certo</h3>
+                <p>Lista de produtos e serviços padronizados para coleta e estimativa de consumo das unidades
+                    hospitalares que formalizando a demanda</p>
+            </div>
+            <div class="card" data-url="https://www.appsheet.com/start/8f387a38-cc76-423b-a81b-44cd5dd83ed0">
+                <img src="/img/contratoeempenho.png" alt="Imagem do Card 2" loading="lazy">
+                <h3>Contratos e Empenhos</h3>
+                <p>Organização nos processos administrativos de aquisições, pagamentos.</p>
+            </div>
+            <div class="card" data-url="https://www.appsheet.com/start/d86bb8b7-e6a8-4c5a-a08b-45ffdd5c9bc8">
+                <img src="/img/levantamentodeprof.png" alt="Imagem do Card 3" loading="lazy">
+                <h3>Levantamento de Profissionais</h3>
+                <p>Melhoria na gestão de pessoas.</p>
+            </div>
+            <div class="card" data-url="https://www.appsheet.com/start/35b0b2fa-fce3-4c94-af15-a1a29f517575">
+                <img src="/img/passivodescoberto.png" alt="Imagem do Card 4" loading="lazy">
+                <h3>Passivo Descoberto</h3>
+                <p>Registro das Notas Fiscais das unidade hospitalares que não foram empenhadas.</p>
+            </div>
+            <div class="card" data-url="https://www.appsheet.com/start/4cf662af-46c0-4657-b9a1-867fc9435ba2">
+                <img src="/img/controlederisco.png" alt="Imagem do Card 5" loading="lazy">
+                <h3>Controle de Riscos GBSAGH</h3>
+                <p>Controle de ameaças que impactam os processos internos, classificando-as por nível de gravidade, de
+                    baixa a alta urgência.</p>
+            </div>
+            <div class="card" data-url="https://www.appsheet.com/start/71f8f5b6-6bf5-4f4a-b9e7-ee65aff8a117">
+                <img src="/img/censodevagas.png" alt="Imagem do Card 6" loading="lazy">
+                <h3>Censo de Vagas 2024</h3>
+                <p>Percentual de ocupação atual.</p>
+            </div>
+            <div class="card" data-url="https://www.appsheet.com/start/bc591bb4-9a0b-4589-9802-5dab7fc33389">
+                <img src="/img/field-service.png" alt="Imagem do Card 7" loading="lazy">
+                <h3>Relação de Equipamentos hospitalares</h3>
+                <h2>Em desenvolvimento</h2>
+                <p>Levantamento dos bens permanentes existentes nas unidades hospitalares, bem como seu estado de
+                    conservação e o cenário das manutenções preventivas e corretivas.</p>
+            </div>
+        </div>
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
+    </div>
+</body>
