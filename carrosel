@@ -1,190 +1,113 @@
 <style>
-/* styles.css */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto Condensed', sans-serif; /* Corrigida a fonte */
     margin: 0;
     padding: 0;
+    background-color: #ffffff;
+}
+
+.container {
     display: flex;
+    flex-wrap: wrap; /* Permite que os elementos quebrem linha */
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.carousel-container {
-    position: relative;
-    width: 80%;
-    overflow: hidden;
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+    gap: 20px; /* Espaçamento entre os cartões */
+    padding: 20px;
 }
 
 .card {
-    min-width: 300px;
-    margin: 10px;
     background: white;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 16px;
-    transition: transform 0.3s ease;
+    flex: 1 1 300px; /* Flexível com largura mínima de 300px */
+    max-width: 300px; /* Evita cartões muito grandes em telas largas */
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card img {
-    width: 100%;
-    border-radius: 8px 8px 0 0;
+.icon {
+    width: 25%;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
-.card h3 {
-    margin: 10px 0;
-    padding-top: 15px;
-    color: #1c4587;
+h3 {
+    color: #291d5c;
+    margin-top: 20px;
 }
 
-.card h2 {
-    margin: 10px 0;
-    padding-top: 10px;
+p {
+    color: #333333;
     font-size: 16px;
-    color: #1c4587;
+    line-height: 1.6;
+    text-align: justify;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
 }
 
-.card p {
-    color: #000;
-    padding-top: 25px;
-    font-size: 14px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-align: left;
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 90%; /* Ajusta o cartão para ocupar quase toda a largura */
+    }
 
+    .icon {
+        width: 20%; /* Reduz tamanho dos ícones em telas médias */
+    }
+
+    p {
+        font-size: 14px; /* Texto menor */
+    }
 }
 
-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    z-index: 10;
-}
+@media (max-width: 480px) {
+    .container {
+        padding: 10px; /* Reduz margens gerais */
+    }
 
-button:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
+    .card {
+        flex: 1 1 100%; /* Ocupa a largura inteira em telas pequenas */
+    }
 
-button.prev {
-    left: 0;
-}
+    h3 {
+        font-size: 18px;
+    }
 
-button.next {
-    right: 0;
+    .icon {
+        width: 50%; /* Ícones maiores para compensar telas pequenas */
+    }
+
+    p {
+        font-size: 13px;
+    }
 }
 </style>
 
-<script>
-const carousel = document.querySelector('.carousel');
-const cards = document.querySelectorAll('.card');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-let currentIndex = 0;
-
-const updateCarousel = () => {
-  const cardWidth = cards[0].offsetWidth + 20; // Card width + margin
-  carousel.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
-};
-
-const navigateCarousel = (direction) => {
-  currentIndex = (currentIndex + direction + cards.length) % cards.length;
-  updateCarousel();
-};
-
-// Add click event to buttons
-nextButton.addEventListener('click', () => navigateCarousel(1));
-prevButton.addEventListener('click', () => navigateCarousel(-1));
-
-// Open link on card click
-cards.forEach((card) => {
-  card.addEventListener('click', () => {
-    const url = card.getAttribute('data-url');
-    if (url) window.open(url, '_blank');
-  });
-});
-
-// Add keyboard navigation
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') navigateCarousel(1);
-  else if (e.key === 'ArrowLeft') navigateCarousel(-1);
-});
-
-// Initial setup
-updateCarousel();
-
-
-</script>
-
-
-
-
 <body>
-    
-
-
-
-
-<div class="carousel-container">
-
-
-
-        <div class="carousel">
-            <div class="card" data-url="https://www.appsheet.com/start/7cdc83db-a667-45eb-94dd-0f91d8cf3c5e">
-                <img src="/img/pedidocerto.png" alt="Imagem do Card 1" loading="lazy">
-                <h3>Pedido Certo</h3>
-                <p>Lista de produtos e serviços padronizados para coleta e estimativa de consumo das unidades
-                    hospitalares que formalizando a demanda</p>
-            </div>
-            <div class="card" data-url="https://www.appsheet.com/start/8f387a38-cc76-423b-a81b-44cd5dd83ed0">
-                <img src="/img/contratoeempenho.png" alt="Imagem do Card 2" loading="lazy">
-                <h3>Contratos e Empenhos</h3>
-                <p>Organização nos processos administrativos de aquisições, pagamentos.</p>
-            </div>
-            <div class="card" data-url="https://www.appsheet.com/start/d86bb8b7-e6a8-4c5a-a08b-45ffdd5c9bc8">
-                <img src="/img/levantamentodeprof.png" alt="Imagem do Card 3" loading="lazy">
-                <h3>Levantamento de Profissionais</h3>
-                <p>Melhoria na gestão de pessoas.</p>
-            </div>
-            <div class="card" data-url="https://www.appsheet.com/start/35b0b2fa-fce3-4c94-af15-a1a29f517575">
-                <img src="/img/passivodescoberto.png" alt="Imagem do Card 4" loading="lazy">
-                <h3>Passivo Descoberto</h3>
-                <p>Registro das Notas Fiscais das unidade hospitalares que não foram empenhadas.</p>
-            </div>
-            <div class="card" data-url="https://www.appsheet.com/start/4cf662af-46c0-4657-b9a1-867fc9435ba2">
-                <img src="/img/controlederisco.png" alt="Imagem do Card 5" loading="lazy">
-                <h3>Controle de Riscos GBSAGH</h3>
-                <p>Controle de ameaças que impactam os processos internos, classificando-as por nível de gravidade, de
-                    baixa a alta urgência.</p>
-            </div>
-            <div class="card" data-url="https://www.appsheet.com/start/71f8f5b6-6bf5-4f4a-b9e7-ee65aff8a117">
-                <img src="/img/censodevagas.png" alt="Imagem do Card 6" loading="lazy">
-                <h3>Censo de Vagas 2024</h3>
-                <p>Percentual de ocupação atual.</p>
-            </div>
-            <div class="card" data-url="https://www.appsheet.com/start/bc591bb4-9a0b-4589-9802-5dab7fc33389">
-                <img src="/img/field-service.png" alt="Imagem do Card 7" loading="lazy">
-                <h3>Relação de Equipamentos hospitalares</h3>
-                <h2>Em desenvolvimento</h2>
-                <p>Levantamento dos bens permanentes existentes nas unidades hospitalares, bem como seu estado de
-                    conservação e o cenário das manutenções preventivas e corretivas.</p>
-            </div>
+    <div class="container">
+        <div class="card">
+            <img src="https://i.ibb.co/f8kJHcV/Appsheet.png" alt="Ícone AppSheet" class="icon">
+            <h3>Sistema - AppSheet</h3>
+            <p>O AppSheet é uma ferramenta que transforma planilhas em sistemas simples e fáceis de usar. Ele ajuda a organizar e acessar informações de forma prática.</p>
         </div>
-        <button class="prev">❮</button>
-        <button class="next">❯</button>
+        <div class="card">
+            <img src="https://i.ibb.co/xF82kKv/re388xshtgihucfiiavf.png" alt="Power BI Icon" class="icon">
+            <img src="https://i.ibb.co/Pm94dZN/looker-studio-2-2-1-cf27087aa5.png" alt="Looker Studio Icon" class="icon">
+            <h3>Painéis - Power BI e Looker Studio</h3>
+            <p>Relatórios e gráficos interativos que mostram os dados mais importantes para a gestão hospitalar, ajudando na análise e nas tomadas de decisões.</p>
+        </div>
+        <div class="card">
+            <img src="https://i.ibb.co/BGCPXDx/17973.jpg" alt="Central Document Icon" class="icon" style="border-radius: 60px;">
+            <h3>Central de Documentação</h3>
+            <p>É um espaço dentro do portal onde você encontra todos os materiais importantes para a gestão hospitalar. É como uma biblioteca digital organizada para facilitar o acesso e a consulta das informações essenciais.</p>
+        </div>
     </div>
 </body>
